@@ -22,7 +22,7 @@ public class OrderMailListener {
     public void receiveOrder(String message) {
         try {
             OrderMessage order = objectMapper.readValue(message, OrderMessage.class);
-            System.out.println("Received order: " + message);
+            System.out.println("Received order event " + order.getEventType() + " id=" + order.getId());
             orderMailSender.sendOrderMail(order);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to read order message", e);
